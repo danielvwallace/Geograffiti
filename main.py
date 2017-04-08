@@ -4,6 +4,7 @@ import json
 import decimal
 from boto3.dynamodb.conditions import Key, Attr
 
+"""
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
@@ -13,7 +14,7 @@ class DecimalEncoder(json.JSONEncoder):
             else:
                 return int(o)
         return super(DecimalEncoder, self).default(o)
-
+"""
 dynamodb = boto3.resource("dynamodb", region_name="us-west-2", endpoint_url="https://dynamodb.us-west-2.amazonaws.com")
 table = dynamodb.Table("Pixels")
 
@@ -36,5 +37,8 @@ response = table.scan(
     )
 
 for i in response['Items']:
-    print(json.dumps(i))
-
+    outstr = "ID: " + str(i["ID"])
+    outstr = "%s | %s"%(outstr, "x: " + str(i["x"]).rjust(9))
+    outstr = "%s | %s"%(outstr, "y: " + str(i["y"]).rjust(9))
+    outstr = "%s | %s"%(outstr, "rgb: " + i["rgb"].rjust(8))
+    print(outstr)
