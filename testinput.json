@@ -1,11 +1,26 @@
 [
 	{
-		"location" : "nowhere2"
+		"ID" : 1,
+		"x" : 22,
+		"y" : 44,
+		"rgb" : "#FFF"
 	},
 	{
-		"location" : "plzworkk"
+		"ID" : 2,
+		"x" : 723,
+		"y" : 9872,
+		"rgb" : "#AB9"
 	},
 	{
-		"location" : "wooott"
+		"ID" : 3,
+		"x" : 73,
+		"y" : 37,
+		"rgb" : "#A7B"
+	},
+	{
+		"ID" : 4,
+		"x" : 9873,
+		"y" : 71929,
+		"rgb" : "#000"
 	}
 ]

@@ -15,25 +15,25 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(o)
 
 dynamodb = boto3.resource("dynamodb", region_name="us-west-2", endpoint_url="https://dynamodb.us-west-2.amazonaws.com")
-table = dynamodb.Table("Pixel")
+table = dynamodb.Table("Pixels")
 
 
 #Adds entries from input file "testinput.json"
 
 with open("testinput.json") as json_file:
-    locations = json.load(json_file)
-    for loc in locations:
-        place = loc
-
-        print("Adding location:", place["location"])
+    pixels = json.load(json_file)
+    for pixel in pixels:
+        print("Adding location: %d, %d w/RGB: %s"%(pixel["x"], pixel["y"], pixel["rgb"]))
 
         table.put_item(
-           Item=place
+           Item=pixel
         )
 
 # Scan through table for all items when scan() is empty
 
-response = table.scan()
+response = table.scan(
+
+    )
 
 for i in response['Items']:
     print(json.dumps(i))
