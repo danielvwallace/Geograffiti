@@ -17,6 +17,9 @@ class DecimalEncoder(json.JSONEncoder):
 dynamodb = boto3.resource("dynamodb", region_name="us-west-2", endpoint_url="https://dynamodb.us-west-2.amazonaws.com")
 table = dynamodb.Table("Pixel")
 
+
+#Adds entries from input file "testinput.json"
+
 with open("testinput.json") as json_file:
     locations = json.load(json_file)
     for loc in locations:
@@ -28,9 +31,9 @@ with open("testinput.json") as json_file:
            Item=place
         )
 
-response = table.scan(
-    ProjectionExpression="location"
-    )
+# Scan through table for all items when scan() is empty
+
+response = table.scan()
 
 for i in response['Items']:
     print(json.dumps(i))
