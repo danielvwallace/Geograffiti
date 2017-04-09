@@ -38,7 +38,14 @@ def index():
 
 @application.route('/api/update_pixel', methods=['POST'])
 def api_start_session():
-	table.put_item(Item=request.get_json())
+	data = request.get_json()
+	response = table.scan()['Items']
+	print(response)
+	for i in response:
+		if i['x'] == data['x'] and i['y'] == data['y']:
+			table.delete_item(Key={'ID':i['ID']})
+	table.put_item(Item=data)
+	return jsonify({'message':'success'})
 
 @application.route('/api/get_pixels', methods=['GET'])
 def api_get_questionnaire():
